@@ -1,4 +1,4 @@
-FROM php:8.5-alpine3.24 AS base
+FROM php:8.5.12-alpine3.24 AS base
 
 ARG SHLINK_VERSION=latest
 ENV SHLINK_VERSION=${SHLINK_VERSION}
@@ -15,6 +15,7 @@ WORKDIR /etc/shlink
 
 # Install required PHP extensions
 RUN \
+    apk upgrade --no-cache musl && \
     # Temp install dev dependencies needed to compile the extensions \
     apk add --no-cache --virtual .dev-deps sqlite-dev postgresql-dev icu-dev libzip-dev zlib-dev linux-headers && \
     docker-php-ext-install -j"$(nproc)" pdo_mysql pdo_pgsql intl calendar sockets bcmath zip && \
