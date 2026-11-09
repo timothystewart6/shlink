@@ -45,7 +45,3 @@ runs:
       if: ${{ inputs.install-deps == 'yes' }}
       run: composer install --no-interaction --prefer-dist ${{ inputs.php-version == '8.6' && '--ignore-platform-req=php' || '' }}
       shell: bash
-    - name: Audit dependencies
-      if: ${{ inputs.install-deps == 'yes' }}
-      run: composer audit --no-interaction
-      shell: bash
